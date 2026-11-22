@@ -38,7 +38,7 @@ describe("CoffeeOS Application Tests", () => {
   beforeEach(() => {
     window.history.replaceState({}, "", "/");
 
-    global.fetch = vi.fn((url, options = {}) => {
+    globalThis.fetch  = vi.fn((url, options = {}) => {
       const method = options.method || "GET";
 
       if (method === "GET") {
@@ -145,7 +145,7 @@ describe("CoffeeOS Application Tests", () => {
     expect(screen.getByText("Category is required")).toBeInTheDocument();
     expect(screen.getByText("Origin is required")).toBeInTheDocument();
 
-    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(globalThis.fetch ).toHaveBeenCalledTimes(1);
   });
 
   it("adds a new product successfully", async () => {
@@ -190,7 +190,7 @@ describe("CoffeeOS Application Tests", () => {
     );
 
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith(
+      expect(globalThis.fetch ).toHaveBeenCalledWith(
         "http://localhost:3000/products",
         expect.objectContaining({ method: "POST" })
       );
@@ -217,7 +217,7 @@ describe("CoffeeOS Application Tests", () => {
     );
 
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith(
+      expect(globalThis.fetch ).toHaveBeenCalledWith(
         "http://localhost:3000/products/1",
         expect.objectContaining({ method: "PATCH" })
       );
@@ -246,7 +246,7 @@ describe("CoffeeOS Application Tests", () => {
     await userEvent.click(deleteButtons[0]);
 
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith(
+      expect(globalThis.fetch ).toHaveBeenCalledWith(
         "http://localhost:3000/products/1",
         expect.objectContaining({ method: "DELETE" })
       );
@@ -275,7 +275,7 @@ describe("CoffeeOS Application Tests", () => {
     expect(screen.getByText("Ethiopian Coffee")).toBeInTheDocument();
   });
    it("displays an error when products fail to load", async () => {
-  global.fetch = vi.fn().mockRejectedValue(
+  globalThis.fetch  = vi.fn().mockRejectedValue(
     new Error("Network error")
   );
 
@@ -286,7 +286,7 @@ describe("CoffeeOS Application Tests", () => {
   ).toBeInTheDocument();
 }); 
   it("displays an error when adding a product fails", async () => {
-    global.fetch = vi.fn((url, options = {}) => {
+    globalThis.fetch  = vi.fn((url, options = {}) => {
       const method = options.method || "GET";
 
       if (method === "GET") {
@@ -351,7 +351,7 @@ describe("CoffeeOS Application Tests", () => {
   });
 
   it("displays an error when updating a product fails", async () => {
-    global.fetch = vi.fn((url, options = {}) => {
+    globalThis.fetch  = vi.fn((url, options = {}) => {
       const method = options.method || "GET";
 
       if (method === "GET") {
