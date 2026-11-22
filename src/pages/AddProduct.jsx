@@ -47,28 +47,37 @@ function AddProduct() {
     return Object.keys(newErrors).length === 0;
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    if (!validate()) return;
+  
+async function handleSubmit(e) {
+  e.preventDefault();
+  if (!validate()) return;
 
-    setIsSubmitting(true);
-    try {
-      await addProduct({
-        name: formData.name.trim(),
-        category: formData.category.trim(),
-        origin: formData.origin.trim(),
-        price: Number(formData.price),
-        stock: Number(formData.stock),
-        image: formData.image.trim(),
-      });
-      navigate("/"); // Change to "/products" if that's your list route
-    } catch (err) {
-      alert("Failed to add product. Try again.");
-      console.error(err);
-    } finally {
-      setIsSubmitting(false);
+  setIsSubmitting(true);
+
+  try {
+    const success = await addProduct({
+      name: formData.name.trim(),
+      category: formData.category.trim(),
+      origin: formData.origin.trim(),
+      price: Number(formData.price),
+      stock: Number(formData.stock),
+      image: formData.image.trim(),
+    });
+
+    if (success) {
+      navigate("/");
+    } else {
+      setErrors((prev) => ({
+        ...prev,
+        submit: "Failed to add product. Please try again.",
+      }));
     }
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setIsSubmitting(false);
   }
+}
 
   const inputClass = "w-full border rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-amber-600";
   const errorClass = "text-red-600 text-sm mt-1";
@@ -119,7 +128,11 @@ function AddProduct() {
             <img src={formData.image} alt="Preview" className="mt-3 h-40 w-full object-cover rounded-lg" onError={(e) => (e.target.style.display = "none")} />
           )}
         </div>
-
+        {errors.submit && (
+          <p className="text-red-600 text-sm">
+            {errors.submit}
+          </p>
+        )}
         <div className="flex gap-3 pt-2">
           <button type="submit" disabled={isSubmitting} className="flex-1 bg-amber-800 text-white py-2.5 rounded-lg hover:bg-amber-900 disabled:opacity-50">
             {isSubmitting ? "Adding..." : "Add Product"}

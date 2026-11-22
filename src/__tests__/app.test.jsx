@@ -274,4 +274,119 @@ describe("CoffeeOS Application Tests", () => {
 
     expect(screen.getByText("Ethiopian Coffee")).toBeInTheDocument();
   });
+   it("displays an error when products fail to load", async () => {
+  global.fetch = vi.fn().mockRejectedValue(
+    new Error("Network error")
+  );
+
+  renderApp();
+
+  expect(
+    await screen.findByText("Network error")
+  ).toBeInTheDocument();
+}); 
+  it("displays an error when adding a product fails", async () => {
+    global.fetch = vi.fn((url, options = {}) => {
+      const method = options.method || "GET";
+
+      if (method === "GET") {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve([...mockProducts]),
+        });
+      }
+
+      if (method === "POST") {
+        return Promise.resolve({
+          ok: false,
+        });
+      }
+    });
+
+    renderApp();
+
+    await userEvent.click(
+      await screen.findByRole("link", { name: "Add Product" })
+    );
+
+    await userEvent.type(
+      screen.getByPlaceholderText("e.g. Ethiopian Yirgacheffe"),
+      "Ugandan Coffee"
+    );
+
+    await userEvent.type(
+      screen.getByPlaceholderText("e.g. Arabica"),
+      "Arabica"
+    );
+
+    await userEvent.type(
+      screen.getByPlaceholderText("e.g. Ethiopia"),
+      "Uganda"
+    );
+
+    await userEvent.type(
+      screen.getByPlaceholderText("12.99"),
+      "18"
+    );
+
+    await userEvent.type(
+      screen.getByPlaceholderText("50"),
+      "30"
+    );
+
+    await userEvent.type(
+      screen.getByPlaceholderText("https://..."),
+      "https://example.com/uganda.jpg"
+    );
+
+    await userEvent.click(
+      screen.getByRole("button", { name: "Add Product" })
+    );
+
+    expect(
+      await screen.findByText(
+        "Failed to add product. Please try again."
+      )
+    ).toBeInTheDocument();
+  });
+
+  it("displays an error when updating a product fails", async () => {
+    global.fetch = vi.fn((url, options = {}) => {
+      const method = options.method || "GET";
+
+      if (method === "GET") {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve([...mockProducts]),
+        });
+      }
+
+      if (method === "PATCH") {
+        return Promise.resolve({
+          ok: false,
+        });
+      }
+    });
+
+    window.history.replaceState({}, "", "/products/1/edit");
+
+    renderApp();
+
+    const nameInput = await screen.findByDisplayValue("Ethiopian Coffee");
+
+    fireEvent.change(nameInput, {
+      target: { name: "name", value: "Updated Coffee" },
+    });
+
+    await userEvent.click(
+      screen.getByRole("button", { name: "Save Changes" })
+    );
+
+    expect(
+      await screen.findByText(
+        "Failed to update product. Please try again."
+      )
+    ).toBeInTheDocument();
+  });
+
 });
