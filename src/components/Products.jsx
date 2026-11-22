@@ -1,8 +1,8 @@
-
+import { Link } from "react-router-dom";
 import useProducts from "../hooks/useProducts";
 
 function Products() {
-  const { products, loading, error, searchTerm } = useProducts();
+  const { products, loading, error, searchTerm, deleteProduct } = useProducts();
 
   const filteredProducts = products.filter((product) => {
     const search = searchTerm.toLowerCase();
@@ -13,6 +13,16 @@ function Products() {
       product.origin.toLowerCase().includes(search)
     );
   });
+
+  // Delete with confirmation
+  function handleDelete(id, name) {
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete "${name}"?`
+    );
+    if (confirmDelete) {
+      deleteProduct(id);
+    }
+  }
 
   if (loading) return <p>Loading products...</p>;
   if (error) return <p>{error}</p>;
@@ -58,6 +68,23 @@ function Products() {
                 <p className="text-sm text-gray-500">
                   Stock: {product.stock} units
                 </p>
+
+                {/* Edit + Delete Buttons */}
+                <div className="flex gap-2 mt-4">
+                  <Link
+                    to={`/edit/${product.id}`}
+                    className="flex-1 text-center bg-amber-800 text-white py-2 rounded-lg hover:bg-amber-900"
+                  >
+                    Edit
+                  </Link>
+
+                  <button
+                    onClick={() => handleDelete(product.id, product.name)}
+                    className="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
           ))}
