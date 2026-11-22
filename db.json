@@ -1,0 +1,65 @@
+
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Ethiopian Yirgacheffe",
+      "category": "Arabica",
+      "price": 18.99,
+      "description": "A smooth coffee with floral notes and citrus flavours.",
+      "origin": "Ethiopia",
+      "roastLevel": "Light",
+      "stock": 25
+    },
+    {
+      "id": "2",
+      "name": "Colombian Supremo",
+      "category": "Arabica",
+      "price": 16.50,
+      "description": "A balanced coffee with caramel and nutty notes.",
+      "origin": "Colombia",
+      "roastLevel": "Medium",
+      "stock": 40
+    },
+    {
+      "id": "3",
+      "name": "Kenyan AA",
+      "category": "Arabica",
+      "price": 21.00,
+      "description": "A bright coffee with berry flavours and rich acidity.",
+      "origin": "Kenya",
+      "roastLevel": "Medium",
+      "stock": 30
+    },
+    {
+      "id": "4",
+      "name": "Brazilian Santos",
+      "category": "Arabica",
+      "price": 14.99,
+      "description": "A mild coffee with chocolate and nutty flavours.",
+      "origin": "Brazil",
+      "roastLevel": "Medium",
+      "stock": 50
+    },
+    {
+      "id": "5",
+      "name": "Italian Espresso Blend",
+      "category": "Blend",
+      "price": 19.50,
+      "description": "A bold blend designed for rich espresso shots.",
+      "origin": "Italy",
+      "roastLevel": "Dark",
+      "stock": 20
+    },
+    {
+      "id": "6",
+      "name": "Guatemalan Antigua",
+      "category": "Arabica",
+      "price": 17.75,
+      "description": "A full-bodied coffee with cocoa and spice notes.",
+      "origin": "Guatemala",
+      "roastLevel": "Medium",
+      "stock": 35
+    }
+  ]
+}
