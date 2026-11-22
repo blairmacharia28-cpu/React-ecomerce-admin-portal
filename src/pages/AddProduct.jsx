@@ -124,7 +124,7 @@ function AddProduct() {
           <button type="submit" disabled={isSubmitting} className="flex-1 bg-amber-800 text-white py-2.5 rounded-lg hover:bg-amber-900 disabled:opacity-50">
             {isSubmitting ? "Adding..." : "Add Product"}
           </button>
-          <button type="button" onClick={() => navigate("/")} className="flex-1 bg-gray-200 py-2.5 rounded-lg hover:bg-gray-300">
+          <button type="button" onClick={() => navigate("/products")} className="flex-1 bg-gray-200 py-2.5 rounded-lg hover:bg-gray-300">
             Cancel
           </button>
         </div>
