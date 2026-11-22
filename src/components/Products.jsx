@@ -1,3 +1,4 @@
+
 import useProducts from "../hooks/useProducts";
 
 function Products() {
@@ -18,19 +19,49 @@ function Products() {
 
   return (
     <div>
-      <h2>Our Coffee Products</h2>
+      <h2 className="text-2xl font-bold text-amber-950 mb-6">
+        Our Coffee Products
+      </h2>
 
       {filteredProducts.length === 0 ? (
         <p>No products found.</p>
       ) : (
-        filteredProducts.map((product) => (
-          <div key={product.id}>
-            <h3>{product.name}</h3>
-            <p>Category: {product.category}</p>
-            <p>Origin: {product.origin}</p>
-            <p>Price: ${product.price}</p>
-          </div>
-        ))
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProducts.map((product) => (
+            <div
+              key={product.id}
+              className="bg-white rounded-xl shadow-md overflow-hidden"
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-48 object-cover"
+              />
+
+              <div className="p-5">
+                <h3 className="text-lg font-bold text-amber-950">
+                  {product.name}
+                </h3>
+
+                <p className="text-gray-600">
+                  Category: {product.category}
+                </p>
+
+                <p className="text-gray-600">
+                  Origin: {product.origin}
+                </p>
+
+                <p className="text-amber-900 font-bold mt-3">
+                  ${product.price}
+                </p>
+
+                <p className="text-sm text-gray-500">
+                  Stock: {product.stock} units
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
