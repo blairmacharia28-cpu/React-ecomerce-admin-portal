@@ -69,30 +69,37 @@ function EditProduct() {
   }
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    if (!validate()) return;
+  e.preventDefault();
+  if (!validate()) return;
 
-    setIsSubmitting(true);
-    try {
-      await updateProduct(id, {
-        name: formData.name.trim(),
-        category: formData.category.trim(),
-        origin: formData.origin.trim(),
-        price: Number(formData.price),
-        stock: Number(formData.stock),
-        image: formData.image.trim(),
-      });
-      ("/products");
-    } catch (err) {
-      alert("Failed to update product. Try again.");
-      console.error(err);
-    } finally {
-      setIsSubmitting(false);
+  setIsSubmitting(true);
+
+  try {
+    const success = await updateProduct(id, {
+      name: formData.name.trim(),
+      category: formData.category.trim(),
+      origin: formData.origin.trim(),
+      price: Number(formData.price),
+      stock: Number(formData.stock),
+      image: formData.image.trim(),
+    });
+
+    if (success) {
+      navigate("/products");
+    } else {
+      setErrors((prev) => ({
+        ...prev,
+        submit: "Failed to update product. Please try again.",
+      }));
     }
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setIsSubmitting(false);
   }
-
+}
   if (loading) return <p className="p-8">Loading product...</p>;
-  if (notFound) return <p className="p-8">Product not found. <button onClick={() => ("/products")} className="text-amber-800 underline">Go back</button></p>;
+  if (notFound) return <p className="p-8">Product not found. <button onClick={() => navigate("/products")} className="text-amber-800 underline">Go back</button></p>;
 
   const inputClass = "w-full border rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-amber-600";
   const errorClass = "text-red-600 text-sm mt-1";
@@ -103,6 +110,9 @@ function EditProduct() {
       <p className="text-gray-600 mb-6">Update the details of an existing coffee product.</p>
 
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-md max-w-2xl space-y-4">
+        {errors.submit && (
+  <p className="text-red-600 text-sm">{errors.submit}</p>
+)}
         <div>
           <label className="block font-medium mb-1">Name *</label>
           <input name="name" value={formData.name} onChange={handleChange} className={inputClass} />
@@ -148,7 +158,7 @@ function EditProduct() {
           <button type="submit" disabled={isSubmitting} className="flex-1 bg-amber-800 text-white py-2.5 rounded-lg hover:bg-amber-900 disabled:opacity-50">
             {isSubmitting ? "Updating..." : "Save Changes"}
           </button>
-          <button type="button" onClick={() => ("/products")} className="flex-1 bg-gray-200 py-2.5 rounded-lg hover:bg-gray-300">
+          <button type="button" onClick={() => navigate("/products")} className="flex-1 bg-gray-200 py-2.5 rounded-lg hover:bg-gray-300">
             Cancel
           </button>
         </div>
