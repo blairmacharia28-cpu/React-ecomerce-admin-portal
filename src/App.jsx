@@ -1,4 +1,5 @@
 
+import Products from "./components/Products";
 import SearchBar from "./components/searchBar";
 import useProducts from './hooks/useProducts'
 import { useState } from 'react'
@@ -25,6 +26,8 @@ function App() {
 </h1> 
 
 <SearchBar/>
+
+<Products/>
 
 {loading && <p>Loading products...</p>}
 {error && <p>{error}</p>}
