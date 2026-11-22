@@ -1,3 +1,7 @@
+
+import Products from "./components/Products";
+import SearchBar from "./components/searchBar";
+import useProducts from './hooks/useProducts'
 import { useState } from 'react'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
@@ -5,6 +9,7 @@ import viteLogo from './assets/vite.svg'
 import './App.css'
 
 function App() {
+  const { products, loading, error } = useProducts()
   const [count, setCount] = useState(0)
 
   return (
@@ -19,6 +24,16 @@ function App() {
          <h1 className="text-4xl font-bold text-amber-800">
   Coffee Admin Portal
 </h1> 
+
+<SearchBar/>
+
+<Products/>
+
+{loading && <p>Loading products...</p>}
+{error && <p>{error}</p>}
+{!loading && !error && (
+  <p>Products loaded: {products.length}</p>
+)}
           <p>
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
