@@ -7,6 +7,7 @@ export function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     async function fetchProducts() {
@@ -36,6 +37,8 @@ export function ProductProvider({ children }) {
         setProducts,
         loading,
         error,
+        searchTerm,
+        setSearchTerm,
       }}
     >
       {children}
