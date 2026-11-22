@@ -1,11 +1,10 @@
-
 {
   "products": [
     {
       "id": "1",
       "name": "Ethiopian Yirgacheffe",
       "category": "Arabica",
-      "price": 18.99,
+      "price": 25.89,
       "description": "A smooth coffee with floral notes and citrus flavours.",
       "origin": "Ethiopia",
       "roastLevel": "Light",
@@ -16,23 +15,23 @@
       "id": "2",
       "name": "Colombian Supremo",
       "category": "Arabica",
-      "price": 16.50,
+      "price": 16.5,
       "description": "A balanced coffee with caramel and nutty notes.",
       "origin": "Colombia",
       "roastLevel": "Medium",
       "stock": 40,
-      "image":"https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=500"
+      "image": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=500"
     },
     {
       "id": "3",
       "name": "Kenyan AA",
       "category": "Arabica",
-      "price": 21.00,
+      "price": 21,
       "description": "A bright coffee with berry flavours and rich acidity.",
       "origin": "Kenya",
       "roastLevel": "Medium",
       "stock": 30,
-      "image":"https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=500"
+      "image": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=500"
     },
     {
       "id": "4",
@@ -43,18 +42,18 @@
       "origin": "Brazil",
       "roastLevel": "Medium",
       "stock": 50,
-      "image":"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500"
+      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500"
     },
     {
       "id": "5",
       "name": "Italian Espresso Blend",
       "category": "Blend",
-      "price": 19.50,
+      "price": 19.5,
       "description": "A bold blend designed for rich espresso shots.",
       "origin": "Italy",
       "roastLevel": "Dark",
       "stock": 20,
-      "image":"https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500"
+      "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500"
     },
     {
       "id": "6",
@@ -65,7 +64,8 @@
       "origin": "Guatemala",
       "roastLevel": "Medium",
       "stock": 35,
-      "image":"https://images.unsplash.com/photo-1511920170033-f8396924c348?w=500"
+      "image": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=500"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
