@@ -80,23 +80,24 @@ export function ProductProvider({ children }) {
   }
 
   // 3. DELETE PRODUCT - DELETE
-  async function deleteProduct(id) {
-    try {
-      const response = await fetch(`http://localhost:3000/products/${id}`, {
-        method: "DELETE",
-      });
+ async function deleteProduct(id) {
+  try {
+    const response = await fetch(`http://localhost:3000/products/${id}`, {
+      method: "DELETE",
+    });
 
-      if (!response.ok) {
-        throw new Error("Failed to delete product");
-      }
-
-      // Remove from list without refreshing
-      setProducts((prev) => prev.filter((product) => product.id !== id));
-    } catch (err) {
-      setError(err.message);
+    if (!response.ok) {
+      throw new Error("Failed to delete product");
     }
-  }
 
+    setProducts((prev) => prev.filter((product) => product.id !== id));
+
+    return true;
+  } catch (err) {
+    setError(err.message);
+    return false;
+  }
+}
   return (
     <ProductContext.Provider
       value={{
