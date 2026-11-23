@@ -1,16 +1,125 @@
-# React + Vite
+# CoffeeOS – Coffee E-commerce Admin Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CoffeeOS is a React-based administration dashboard for managing a coffee e-commerce inventory. It allows administrators to view, search, add, edit, and delete coffee products through a responsive user interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Dashboard:** View inventory statistics and product information.
+- **Product Management:** Add, edit, view, and delete coffee products.
+- **Dynamic Search:** Search products by name, category, and origin.
+- **Form Validation:** Validate product information before submission.
+- **Responsive Design:** Access the dashboard on desktop and mobile devices.
+- **Error Handling:** Display feedback when server requests fail.
+- **Persistent Data:** Store product information using JSON Server.
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- JavaScript
+- Vite
+- Tailwind CSS
+- React Router
+- Context API
+- JSON Server
+- Vitest
+- React Testing Library
+- Git and GitHub
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```text
+src/
+├── components/
+├── context/
+├── hooks/
+├── pages/
+├── __tests__/
+├── App.jsx
+├── App.css
+├── index.css
+├── main.jsx
+└── setupTests.js
+
+db.json
+vite.config.js
+package.json
+```
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have Node.js and npm installed.
+
+### 1. Clone the repository
+
+```bash
+git clone git@github.com:blairmacharia28-cpu/React-ecomerce-admin-portal.git
+```
+
+### 2. Navigate into the project
+
+```bash
+cd React-ecomerce-admin-portal
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the JSON Server
+
+```bash
+npm run server
+```
+
+The backend runs at:
+
+`http://localhost:3000`
+
+### 5. Start the development server
+
+Open another terminal in the project folder and run:
+
+```bash
+npm run dev
+```
+
+Open the local URL displayed in your terminal.
+
+## Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run server` | Start JSON Server |
+| `npm run build` | Create a production build |
+| `npm run lint` | Run ESLint |
+| `npm test -- --run` | Run automated tests |
+
+## Testing
+
+The project uses Vitest and React Testing Library to test application functionality, including:
+
+- Dashboard rendering
+- Product listing and search
+- Product creation and editing
+- Product deletion
+- Form validation
+- Error handling
+
+Run the tests using:
+
+```bash
+npm test -- --run
+```
+
+## Git Workflow
+
+The project uses feature branches and pull requests to organize development and merge changes into the main branch.
+
+## Author
+
+Developed as a React software engineering group project.
