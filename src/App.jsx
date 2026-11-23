@@ -1,5 +1,5 @@
 
-
+import { useState } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -13,15 +13,35 @@ import EditProduct from "./pages/EditProduct";
 
 import "./App.css";
 
+
 function Layout() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function toggleMenu() {
+    setMenuOpen((previous) => !previous);
+  }
+
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-amber-50">
-      <Navbar />
+      <Navbar onMenuClick={toggleMenu} />
 
-      <div className="flex flex-1">
-        <Sidebar />
+      <div className="flex flex-1 relative">
+        {menuOpen && (
+          <button
+            type="button"
+            aria-label="Close navigation menu"
+            onClick={closeMenu}
+            className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          />
+        )}
 
-        <main className="flex-1">
+        <Sidebar isOpen={menuOpen} onClose={closeMenu} />
+
+        <main className="flex-1 min-w-0">
           <Outlet />
         </main>
       </div>
