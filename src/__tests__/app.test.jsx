@@ -285,6 +285,47 @@ describe("CoffeeOS Application Tests", () => {
     await screen.findByText("Network error")
   ).toBeInTheDocument();
 }); 
+
+it("displays an error when deleting a product fails", async () => {
+  vi.spyOn(window, "confirm").mockReturnValue(true);
+  vi.spyOn(window, "alert").mockImplementation(() => {});
+
+  globalThis.fetch = vi.fn((url, options = {}) => {
+    const method = options.method || "GET";
+
+    if (method === "GET") {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve([...mockProducts]),
+      });
+    }
+
+    if (method === "DELETE") {
+      return Promise.resolve({
+        ok: false,
+      });
+    }
+  });
+
+  renderApp();
+
+  await userEvent.click(
+    await screen.findByRole("link", { name: "Products" })
+  );
+
+  await screen.findByText("Ethiopian Coffee");
+
+  await userEvent.click(
+    screen.getAllByRole("button", { name: "Delete" })[0]
+  );
+
+  await waitFor(() => {
+    expect(window.alert).toHaveBeenCalledWith(
+      "Failed to delete product. Please try again."
+    );
+  });
+});
+
   it("displays an error when adding a product fails", async () => {
     globalThis.fetch  = vi.fn((url, options = {}) => {
       const method = options.method || "GET";

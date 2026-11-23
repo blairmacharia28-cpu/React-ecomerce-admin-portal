@@ -15,19 +15,27 @@ function Products() {
   });
 
   // Delete with confirmation
-  function handleDelete(id, name) {
-    const confirmDelete = window.confirm(
-      `Are you sure you want to delete "${name}"?`
-    );
-    if (confirmDelete) {
-      deleteProduct(id);
+  
+async function handleDelete(id, name) {
+  const confirmDelete = window.confirm(
+    `Are you sure you want to delete "${name}"?`
+  );
+
+  if (confirmDelete) {
+    const success = await deleteProduct(id);
+
+    if (!success) {
+      alert("Failed to delete product. Please try again.");
     }
   }
+}
+if (loading) return <p>Loading products...</p>;
 
-  if (loading) return <p>Loading products...</p>;
-  if (error) return <p>{error}</p>;
-
-  return (
+if (error) {
+  return <p className="text-red-600 p-4">{error}</p>;
+}
+  
+return (
     <div>
       <h2 className="text-2xl font-bold text-amber-950 mb-6">
         Our Coffee Products
