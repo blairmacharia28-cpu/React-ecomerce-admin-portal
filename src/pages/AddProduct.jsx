@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useState, useId, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useProducts from "../hooks/useProducts";
 
-function AddProduct() {
+function AddProduct() {  const id = useId();
+  const nameInputRef = useRef(null);
+
+  useEffect(() => {
+    nameInputRef.current.focus();
+  }, []);
   const { addProduct } = useProducts();
   const navigate = useNavigate();
 
@@ -88,12 +93,23 @@ async function handleSubmit(e) {
       <p className="text-gray-600 mb-6">Add a new coffee product to your inventory.</p>
 
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-md max-w-2xl space-y-4">
-        <div>
-          <label className="block font-medium mb-1">Name *</label>
-          <input name="name" value={formData.name} onChange={handleChange} placeholder="e.g. Ethiopian Yirgacheffe" className={inputClass} />
-          {errors.name && <p className={errorClass}>{errors.name}</p>}
-        </div>
+       <div>
+  <label htmlFor={`${id}-name`} className="block font-medium mb-1">
+    Name *
+  </label>
 
+  <input
+    id={`${id}-name`}
+    ref={nameInputRef}
+    name="name"
+    value={formData.name}
+    onChange={handleChange}
+    placeholder="e.g. Ethiopian Yirgacheffe"
+    className={inputClass}
+  />
+
+  {errors.name && <p className={errorClass}>{errors.name}</p>}
+</div>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block font-medium mb-1">Category *</label>
