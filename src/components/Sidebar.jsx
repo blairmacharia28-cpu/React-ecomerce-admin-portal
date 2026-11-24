@@ -1,5 +1,6 @@
 
 
+
 import { NavLink } from "react-router-dom";
 
 function Sidebar({ isOpen, onClose }) {
@@ -16,7 +17,7 @@ function Sidebar({ isOpen, onClose }) {
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
     >
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-lg font-bold">Menu</h2>
+        <h2 className="text-lg font-bold">Admin Menu</h2>
 
         <button
           type="button"
@@ -31,19 +32,19 @@ function Sidebar({ isOpen, onClose }) {
       <nav>
         <ul className="space-y-4">
           <li>
-            <NavLink to="/" end className={linkStyle} onClick={onClose}>
+            <NavLink to="/admin" end className={linkStyle} onClick={onClose}>
               Dashboard
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/products" end className={linkStyle} onClick={onClose}>
+            <NavLink to="/admin/products" end className={linkStyle} onClick={onClose}>
               Products
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/products/add" className={linkStyle} onClick={onClose}>
+            <NavLink to="/admin/products/add" className={linkStyle} onClick={onClose}>
               Add Product
             </NavLink>
           </li>

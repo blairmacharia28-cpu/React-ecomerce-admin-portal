@@ -36,7 +36,7 @@ function renderApp() {
 
 describe("CoffeeOS Application Tests", () => {
   beforeEach(() => {
-    window.history.replaceState({}, "", "/");
+    window.history.replaceState({}, "", "/admin");
 
     globalThis.fetch  = vi.fn((url, options = {}) => {
       const method = options.method || "GET";
@@ -81,26 +81,24 @@ describe("CoffeeOS Application Tests", () => {
     vi.restoreAllMocks();
   });
 
-  it("displays the dashboard statistics", async () => {
-    renderApp();
+ it("displays the dashboard statistics", async () => {
+  renderApp();
 
-    expect(
-      await screen.findByText("Welcome to CoffeeOS")
-    ).toBeInTheDocument();
+  expect(
+    await screen.findByText("Total Products")
+  ).toBeInTheDocument();
 
-    expect(screen.getByText("Total Products")).toBeInTheDocument();
-    expect(screen.getByText("Total Stock")).toBeInTheDocument();
-    expect(screen.getByText("Low Stock Products")).toBeInTheDocument();
+  expect(screen.getByText("Total Stock")).toBeInTheDocument();
+  expect(screen.getByText("Low Stock Products")).toBeInTheDocument();
 
-    expect(screen.getByText("2", { selector: "p" })).toBeInTheDocument();
-    expect(screen.getByText("25")).toBeInTheDocument();
-    expect(screen.getByText("1", { selector: "p" })).toBeInTheDocument();
-  });
-
+  expect(screen.getByText("2")).toBeInTheDocument();
+  expect(screen.getByText("25")).toBeInTheDocument();
+  expect(screen.getByText("1")).toBeInTheDocument();
+});
   it("displays products on the Products page", async () => {
     renderApp();
 
-    await screen.findByText("Welcome to CoffeeOS");
+    
 
     await userEvent.click(
       screen.getByRole("link", { name: "Products" })
@@ -197,12 +195,12 @@ describe("CoffeeOS Application Tests", () => {
     });
 
     expect(
-      await screen.findByText("Welcome to CoffeeOS")
+      await screen.findByText("Our Coffee Products")
     ).toBeInTheDocument();
   });
 
   it("loads and updates an existing product", async () => {
-    window.history.replaceState({}, "", "/products/1/edit");
+    window.history.replaceState({}, "", "/admin/products/1/edit");
 
     renderApp();
 
@@ -409,7 +407,7 @@ it("displays an error when deleting a product fails", async () => {
       }
     });
 
-    window.history.replaceState({}, "", "/products/1/edit");
+    window.history.replaceState({}, "", "/admin/products/1/edit");
 
     renderApp();
 

@@ -99,7 +99,7 @@ function EditProductForm({ product, updateProduct, navigate }) {
       });
 
       if (success) {
-        navigate("/products");
+        navigate("/admin/products");
       } else {
         setErrors((prev) => ({
           ...prev,
