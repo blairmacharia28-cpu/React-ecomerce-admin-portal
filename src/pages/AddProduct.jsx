@@ -70,7 +70,7 @@ async function handleSubmit(e) {
     });
 
     if (success) {
-      navigate("/");
+      navigate("/admin/products");
     } else {
       setErrors((prev) => ({
         ...prev,

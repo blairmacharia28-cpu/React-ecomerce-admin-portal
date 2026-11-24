@@ -80,7 +80,7 @@ return (
                 {/* Edit + Delete Buttons */}
                 <div className="flex gap-2 mt-4">
                   <Link
-                    to={`/products/${product.id}/edit`}
+                to={`/admin/products/${product.id}/edit`}
                     className="flex-1 text-center bg-amber-800 text-white py-2 rounded-lg hover:bg-amber-900"
                   >
                     Edit

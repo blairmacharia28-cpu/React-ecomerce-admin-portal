@@ -1,4 +1,5 @@
 
+
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
@@ -10,9 +11,10 @@ import Dashboard from "./pages/Dashboard";
 import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
+import CustomerHome from "./pages/CustomerHome";
+import CustomerShop from "./pages/CustomerShop";
 
 import "./App.css";
-
 
 function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -55,7 +57,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<CustomerHome />} />
+        <Route path="/shop" element={<CustomerShop />} />
+
+        <Route path="/admin" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="products" element={<Products />} />
           <Route path="products/add" element={<AddProduct />} />
