@@ -1,7 +1,8 @@
 
 
+
 import { useState } from "react";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
@@ -11,8 +12,6 @@ import Dashboard from "./pages/Dashboard";
 import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
-import CustomerHome from "./pages/CustomerHome";
-import CustomerShop from "./pages/CustomerShop";
 
 import "./App.css";
 
@@ -57,8 +56,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<CustomerHome />} />
-        <Route path="/shop" element={<CustomerShop />} />
+        <Route path="/" element={<Navigate to="/admin" replace />} />
 
         <Route path="/admin" element={<Layout />}>
           <Route index element={<Dashboard />} />
@@ -66,6 +64,8 @@ function App() {
           <Route path="products/add" element={<AddProduct />} />
           <Route path="products/:id/edit" element={<EditProduct />} />
         </Route>
+
+        <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>
     </BrowserRouter>
   );
